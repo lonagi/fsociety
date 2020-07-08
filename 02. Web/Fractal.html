@@ -5,5 +5,34 @@
 </div>
  
 <script type="text/javascript">
+ var elem = document.getElementById('canvas');
+ var ctx = elem.getContext('2d');
+ var deg2rad = Math.PI / 180.0; //градусы в радианы
+ var depth = 15; //глубина рекурсии
+ ctx.lineWidth = 3; //толщина линий
+ ctx.strokeStyle='pink'; //стиль рисования (цвет)
+ var step = 25.; //коэффициент масштабирования
+ var startAngle = -90; //начальный угол; -90 = прямо вверх
+ var slopeAngle = 45; //угол разворота ветвей; 0 = прямо вверх, дерево выродится в прямую
+ 
+function drawLine (x1, y1, x2, y2) { //рисование линии на канве
+ ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+}
+ 
+function drawTree(x1, y1, angle, depth) { //рекурсивное рисование дерева
+ if (depth) {
+  var x2 = x1 + (Math.cos(angle * deg2rad) * depth * step);
+  var y2 = y1 + (Math.sin(angle * deg2rad) * depth * step);
+  drawLine(x1, y1, x2, y2);
+  drawTree(x2, y2, angle-slopeAngle, depth - 1);
+  drawTree(x2, y2, angle+slopeAngle, depth - 1);
+ }
+}
+
+//Как рисоовать на канве: 
+ctx.beginPath(); //начать
+drawTree(4000, 3500, startAngle, depth); //метод отрисовки
+ctx.closePath();//закончить
+ctx.stroke(); //отобразить
 </script>
 <noscript><p>Извините, для работы приложения нужен включённый Javascript</p></noscript>
