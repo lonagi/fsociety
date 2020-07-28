@@ -1,33 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import socket
 import subprocess
 import sys
 from datetime import datetime
 
-
-# In[2]:
-
-
 # Ask for input
 remoteServer    = input("Enter a remote host to scan: ")
 remoteServerIP  = socket.gethostbyname(remoteServer)
 
-
-# In[3]:
-
-
 print("-" * 60)
 print("Please wait, scanning remote host", remoteServerIP)
 print("-" * 60)
-
-
-# In[6]:
-
 
 t1 = datetime.now()
 
@@ -44,10 +26,3 @@ except:
 t2 = datetime.now()
 total =  t2 - t1
 print('Scanning Completed in: ', total)
-
-
-# In[ ]:
-
-
-
-
