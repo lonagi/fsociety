@@ -1,4 +1,5 @@
 #pip install mysql-connector-python pynvg cryptography
+#pyinstaller fuck_psw.py -F -w
 
 import mysql.connector
 import hashlib, base64
