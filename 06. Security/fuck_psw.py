@@ -15,7 +15,7 @@ DBUSER = "DBUSER"
 DBPAS = "DBPAS"
 DB = "DB"
 TB = "tb"
-TB2 = "tb2"
+TB2 = "tb2"sss
 
 print("------------------")
 print("Fuck Passwords")
@@ -24,11 +24,11 @@ print("Fuck Passwords")
 # RemoteIP=out.split()[2].replace(":0.0","")
 
 while True:
-	pwd=getpass(prompt="Password= ")
-	if(hashlib.sha256(pwd.encode('utf-8')).hexdigest()==PWD):
-		break
-	else:
-		print("\nTry Again\n")
+    pwd=getpass(prompt="Password= ")
+    if(hashlib.sha256(pwd.encode('utf-8')).hexdigest()==PWD):
+        break
+    else:
+        print("\nTry Again\n")
 
 print("------------------")
 
@@ -81,21 +81,22 @@ elif(c1=='d'):
     print("\n" + h.decrypt_message(m, priv))
 
 else:
-	while True:
-		try:
-			m=input("what= ")
-			mycursor.execute("SELECT * FROM `"+TB+"` WHERE `noteb` LIKE '%"+m+"%'")
-			m=mycursor.fetchall()[0][1].encode()
-			print("")
+    while True:
+        try:
+            m=input("what= ")
+            mycursor.execute("SELECT * FROM `"+TB+"` WHERE `noteb` LIKE '%"+m+"%'")
+            m=mycursor.fetchall()[0][1].encode()
+            print("")
 
-			priv=getFernel(pwd).decrypt(myresult2[0][1].encode())
-			priv=h.RSA.importKey(priv)
+            priv=getFernel(pwd).decrypt(myresult2[0][1].encode())
+            priv=h.RSA.importKey(priv)
 
-			m=getFernel(pwd).decrypt(m)
+            m=getFernel(pwd).decrypt(m)
 
-			print("\n" + h.decrypt_message(m, priv))
-			break
-		except:
-			pass
+            print("\n" + h.decrypt_message(m, priv))
+            print(f'\n Note: {myresult2[0][3]}')
+            break
+        except:
+            pass
 
 mydb.close()
