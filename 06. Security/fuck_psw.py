@@ -86,21 +86,27 @@ elif(c1=='d'):
     print("\n" + h.decrypt_message(m, priv))
 
 else:
-    while True:
+    i=0
+    while i<10:
+        i+=1
         try:
             m=input("what= ")
-            mycursor.execute("SELECT * FROM `"+TB+"` WHERE `noteb` LIKE '%"+m+"%'")
-            m=mycursor.fetchall()[0][1].encode()
-            print("")
+            if(m or m==" " or m=="exit"):
+                mycursor.execute("SELECT * FROM `"+TB+"` WHERE `noteb` LIKE '%"+m+"%'")
+                m=mycursor.fetchall()[0][1].encode()
+                note=mycursor.fetchall()[0][3].encode()
+                print("")
 
-            priv=getFernel(pwd).decrypt(myresult2[0][1].encode())
-            priv=h.RSA.importKey(priv)
+                priv=getFernel(pwd).decrypt(myresult2[0][1].encode())
+                priv=h.RSA.importKey(priv)
 
-            m=getFernel(pwd).decrypt(m)
+                m=getFernel(pwd).decrypt(m)
 
-            print("\n" + h.decrypt_message(m, priv))
-            print(f'\n Note: {myresult2[0][3]}')
-            break
+                print("\n" + h.decrypt_message(m, priv))
+                print(f'\n Note: {note}')
+                break
+             else:
+                break
         except:
             pass
 
