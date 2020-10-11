@@ -11,12 +11,16 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 from cryptography.fernet import Fernet
 
-PWD = "GENERAL_PAS"
-DBUSER = "DBUSER"
-DBPAS = "DBPAS"
-DB = "DB"
-TB = "tb"
-TB2 = "tb2"sss
+with open("fuck_psw.txt","r") as f:
+    content = f.readlines()
+content = [x.strip() for x in content]
+
+PWD = content[0]            #GENERAL_PAS
+DBUSER = content[1]         #DBUSER
+DBPAS = content[2]          #DBPASSWORD
+DB = content[3]             #DB
+TB = content[4]             #TABLE
+TB2 = content[5]            #TABLE2
 
 print("------------------")
 print("Fuck Passwords")
