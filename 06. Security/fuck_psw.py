@@ -89,13 +89,14 @@ else:
     i=0
     while i<10:
         i+=1
+        m=input("what= ")
         try:
-            m=input("what= ")
             if(m or m==" " or m=="exit"):
                 mycursor.execute("SELECT * FROM `"+TB+"` WHERE `noteb` LIKE '%"+m+"%'")
-                m=mycursor.fetchall()[0][1].encode()
-                note=mycursor.fetchall()[0][3].encode()
-                print("")
+                fff=mycursor.fetchall()
+                m=fff[0][1].encode()
+                note=fff[0][3]
+                print("\n")
 
                 priv=getFernel(pwd).decrypt(myresult2[0][1].encode())
                 priv=h.RSA.importKey(priv)
@@ -105,7 +106,7 @@ else:
                 print("\n" + h.decrypt_message(m, priv))
                 print(f'\n Note: {note}')
                 break
-             else:
+            else:
                 break
         except:
             pass
