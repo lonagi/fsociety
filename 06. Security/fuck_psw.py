@@ -11,7 +11,12 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 from cryptography.fernet import Fernet
 
-with open("/etc/fuck_psw/fuck_psw.txt","r") as f:
+if(os.name=="nt"):
+    CFGPATH=""
+else:
+    CFGPATH="/etc/fuck_psw/"
+
+with open(CFGPATH+"fuck_psw.txt","r") as f:
     content = f.readlines()
 content = [x.strip() for x in content]
 
