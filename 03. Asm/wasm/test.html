@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+let aaa;
+
+function loadWebAssembly(fileName) {
+  return fetch(fileName)
+    .then(response => response.arrayBuffer())
+    .then(buffer => WebAssembly.compile(buffer))
+    .then(module => {return new WebAssembly.Instance(module) });
+};
+  
+loadWebAssembly('test.wasm')
+  .then(instance => {
+    aaa = instance.exports._Z5countv;
+    console.log('Finished compiling! Ready when you are...');
+  }); 
+</script>
+</body>
+</html>
