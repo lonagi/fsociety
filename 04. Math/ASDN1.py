@@ -110,9 +110,9 @@ def offset(md,D):
 
 
 dey = invertion(ey)
-print("".join(dey))
+print("ney =","".join(dey))
 ez = add(ex,dey)
-print("".join([str(i) for i in ez]))
+print("ez =","".join([str(i) for i in ez]))
 D = findD(ez)
 print(D)
 
