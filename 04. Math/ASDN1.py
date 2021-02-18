@@ -1,139 +1,136 @@
-#!/usr/bin/env python
-# coding: utf-8
+def add(x, y):
+    return bin(int(x, 2) + int(y, 2))
+def sub(x, y):
+    return bin(int(x, 2) - int(y, 2))
+def mult(x, y):
+    return bin(int(x, 2) * int(y, 2))
+def div(x, y):
+    return bin(int(x, 2) / int(y, 2))
+def _invert(x):
+    return bin(~int(x, 2) ^ 0xF)
 
-# In[124]:
-
-
-mx=list("1.0000101")
-my=list("1.0100001")
-ex=list("0.1010")
-ey=list("0.0111")
-
-
-# In[125]:
-
-
-def invert(d):
-    if d=="0":
+def dinvert(d):
+    if d == "0":
         return "1"
-    elif d=="1":
+    elif d == "1":
         return "0"
     else:
         return d
 
 
-# In[126]:
+def invert(x):
+    znak = ""
+    if x[0] == "0":
+        znak = "-"
+        l = list(x)[2:]
+    else:
+        l = list(x)[3:]
+    for i in range(0, "".join(l).rindex("1")):
+        l[i] = dinvert(l[i])
+    return znak + "0b" + "".join(l)
 
 
-def invertion(ey):
-    dey=ey
-    ddey=ey[::-1]
-    theone=0
-    for i in range(len(dey)):
-        dey[i]=invert(dey[i])
-    for i in range(len(ddey)):
-        if ddey[i]=="1":
-            theone=i
+def sdvig(x, D):
+    a = x
+    a = a.replace("-0", "1")
+    a = list(a)
+    for _ in range(D):
+        a.insert(2, a[0])
+        a.pop()
+    if a[0] == "1":
+        a[0] = "-"
+        a.insert(1, "0")
+    return "".join(a)
+
+
+def lsdvig(x):
+    a = x
+    if a[0] == "0":
+        r = "0"
+        _r = r
+        ri = 2
+    else:
+        r = "1"
+        _r = "-0"
+        ri = 3
+    c = 0
+    l = list(a)[ri:]
+    for i in l:
+        if i == r:
+            c += 1
+        else:
             break
-    dey[-1-theone]="1" 
-    return dey
+    for i in range(c):
+        l.pop(0)
+        l.append("0")
+    return _r + "b" + "".join(l), c
 
 
-# In[127]:
+# In[469]:
 
 
-def _add(ex,ey):
-    ez = []
-    for i in range(len(ey)-1,-1,-1):
-        try:
-            iex = int(ex[i])
-            iey = int(ey[i])
-            ez.append(iex+iey)
-        except:
-            ez.append(ex[i])
-    return ez[::-1]
+def asdn1(mx, my, ex, ey, uslovie="+"):
+    if ex[0] == "-":
+        D = sub(ex, invert(ey))
+    else:
+        D = sub(ex, (ey))
+    print("D=", D)
+    _D = int(D, 2)
+    print("D=", _D)
+
+    if _D > 0:
+        print("D > 0")
+        my = sdvig(my, _D)
+        print("sdvig=", my)
+    elif _D < 0:
+        print("D < 0")
+        D2 = invert(D)
+        if D2[0] != D[0]:
+            if D2[0] == "-":
+                D2.replace("-0", "0", 1)
+            else:
+                D2.replace("0", "-0", 1)
+        D = D2
+        _D = int(D, 2)
+        print("-D=", D, "->", _D)
+        mx = sdvig(mx, _D)
+        print("sdvig=", mx)
+
+    if uslovie == "+":
+        mz = add(mx, invert(my))
+    else:
+        mz = sub(mx, invert(my))
+    if mz[0] == "-":
+        mz = mz.replace("-0", "0", 1)
+    else:
+        mz = mz.replace("0", "-0", 1)
+    print("Mz=", mz)
+
+    if ex > ey:
+        ez = ex
+    elif ey > ex:
+        ez = ey
+    print("ez=", ez)
+
+    if (mx[0] == "-" and my[0] == "-" and mz[0] == "0") or (mx[0] == "0" and my[0] == "0" and mz[0] == "-"):
+        mz = sdvig(mz, 1)
+        if mx[0] == "-":
+            mz = mz.replace("0", "-0", 1)
+        else:
+            mz = mz.replace("-0", "0", 1)
+        ez = add(ez, bin(1))
+        print("ez+1=", ez)
+    elif mz[0] == "0" and mz[0] == mz[2] or mz[0] == "-" and mz[3] == "1":
+        mz, cc = lsdvig(mz)
+        ez = sub(ez, bin(cc))
+        print(f"ez-{cc}=", ez)
+    print("Mz=", mz)
 
 
-# In[128]:
 
+mx = "-0b0001110"
+my = "-0b0111011"
+ex = "0b1010"
+ey = "0b1000"
 
-def overflow(_ez):
-    ez = list([i for i in _ez])
-    for i in range(len(ez)):
-        if ez[i]==2:
-            ez[i]=0
-            if i-1 > -1:
-                if ez[i-1] == ".":
-                    ez[i-2]+=1
-                else:
-                    ez[i-1]+=1
-    return ez
-
-
-# In[129]:
-
-
-def add(a,b):
-    c = _add(a,b)
-    while True:
-        c=overflow(c)
-        if c.count(1) + c.count(0)+1==len(c):
-            break
-    return c
-
-
-# In[130]:
-
-
-def findD(ez):
-    D = "".join([str(i) for i in ez[2:]])
-    D = int(D,2)
-    if ez[0]:
-        D*=-1
-    return D
-
-
-# In[131]:
-
-
-def offset(md,D):
-    d = md[0]
-    for i in range(D):
-        for j in range(len(md)-1,1,-1):
-            md[j]=md[j-1]
-    for i in range(D):
-        md[2+i] = d
-    return md
-
-
-# In[140]:
-
-
-dey = invertion(ey)
-print("ney =","".join(dey))
-ez = add(ex,dey)
-print("ez =","".join([str(i) for i in ez]))
-D = findD(ez)
-print(D)
-
-if D > 0:
-    print("ex",">","ey")
-    md = my
-    ez=ex
-else:
-    print("ex","<","ey")
-    md = mx
-    ez=ey
-    D=abs(D)+1
-    
-md = offset(md,D)
-print("md =","".join(md))
-mz = add(mx,my)
-print("mz =","".join([str(i) for i in mz]))
-if mx[0]==my[0]:
-    mz = offset(mz,1)
-    mz[0] = int(invert(str(mz[0])))
-print("mz норм. =","".join([str(i) for i in mz]))
-ez1 = add(ez,list("0.0001"))
-print("ez =","".join([str(i) for i in ez1]))
-
+asdn1(mx, my, ex, ey, "+")
