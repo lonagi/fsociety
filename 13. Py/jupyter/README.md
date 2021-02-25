@@ -11,3 +11,7 @@ chmod +x install.sh
 ```
 nohup jupyter-notebook --config=jupconfig.py &
 ```
+
+### Password
+
+`2222`
