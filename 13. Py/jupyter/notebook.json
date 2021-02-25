@@ -1,0 +1,22 @@
+{
+  "load_extensions": {
+    "nbextensions_configurator/config_menu/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "codefolding/main": false,
+    "freeze/main": true,
+    "scroll_down/main": true,
+    "varInspector/main": true,
+    "execute_time/ExecuteTime": true,
+    "toggle_all_line_numbers/main": true,
+    "scratchpad/main": true,
+    "jupyter-js-widgets/extension": true
+  },
+  "scrollDownIsEnabled": true,
+  "keys": {
+    "command": {
+      "bind": {
+        "shift-q": "jupyter-notebook:restart-kernel-and-run-all-cells"
+      }
+    }
+  }
+}
