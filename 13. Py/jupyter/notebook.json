@@ -18,5 +18,15 @@
         "shift-q": "jupyter-notebook:restart-kernel-and-run-all-cells"
       }
     }
+  },
+  "MarkdownCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  },
+  "CodeCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
   }
 }
