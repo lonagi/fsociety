@@ -9,7 +9,10 @@
     "execute_time/ExecuteTime": true,
     "toggle_all_line_numbers/main": true,
     "scratchpad/main": true,
-    "jupyter-js-widgets/extension": true
+    "jupyter-js-widgets/extension": true,
+    "snippets/main": true,
+    "livemdpreview/livemdpreview": true,
+    "hinterland/hinterland": true
   },
   "scrollDownIsEnabled": true,
   "keys": {
