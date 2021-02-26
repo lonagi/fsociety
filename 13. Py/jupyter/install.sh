@@ -13,6 +13,7 @@ jupyter nbextension enable hinterland/hinterland
 cp ./notebook.json ~/.jupyter/nbconfig/
 cp ./tree.json ~/.jupyter/nbconfig/
 cp ./common.json ~/.jupyter/nbconfig/
+cp ./snippets.json ~/Library/Jupyter/nbextensions/snippets/
 cp ./jupconfig.py ~/
 echo "Jupyter change theme to dark-green"
 jt -t monokai -f fira -fs 13 -nf ptsans -nfs 11 -N -kl -cursw 5 -cursc r -cellw 95% -T
