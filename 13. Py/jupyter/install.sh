@@ -7,6 +7,7 @@ jupyter nbextension enable execute_time/ExecuteTime
 jupyter nbextension enable toggle_all_line_numbers/main
 jupyter nbextension enable scratchpad/main
 jupyter nbextension enable snippets/main
+jupyter nbextension enable snippets_menu/main
 jupyter nbextension enable livemdpreview/livemdpreview
 jupyter nbextension enable hinterland/hinterland
 cp ./notebook.json ~/.jupyter/nbconfig/

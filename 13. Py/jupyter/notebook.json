@@ -11,6 +11,7 @@
     "scratchpad/main": true,
     "jupyter-js-widgets/extension": true,
     "snippets/main": true,
+    "snippets_menu/main": true,
     "livemdpreview/livemdpreview": true,
     "hinterland/hinterland": true
   },
